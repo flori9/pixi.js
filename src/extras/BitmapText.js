@@ -146,13 +146,15 @@ export default class BitmapText extends core.Container
         let line = 0;
         let lastSpace = -1;
         let lastSpaceWidth = 0;
-        let spacesRemoved = 0;
+        //The number of characters in the string that do not get added to
+        //chars
+        let charsNotHandled = 0;
         let maxLineHeight = 0;
 
         for (let i = 0; i < this.text.length; i++)
         {
             const charCode = this.text.charCodeAt(i);
-
+            
             if (/(\s)/.test(this.text.charAt(i)))
             {
                 lastSpace = i;
@@ -164,7 +166,8 @@ export default class BitmapText extends core.Container
                 lineWidths.push(lastLineWidth);
                 maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
                 line++;
-
+                ++charsNotHandled;
+                
                 pos.x = 0;
                 pos.y += data.lineHeight;
                 prevCharCode = null;
@@ -173,10 +176,10 @@ export default class BitmapText extends core.Container
 
             if (lastSpace !== -1 && this._maxWidth > 0 && pos.x * scale > this._maxWidth)
             {
-                core.utils.removeItems(chars, lastSpace - spacesRemoved, i - lastSpace);
+                core.utils.removeItems(chars, lastSpace - charsNotHandled, i - lastSpace);
                 i = lastSpace;
                 lastSpace = -1;
-                ++spacesRemoved;
+                ++charsNotHandled;
 
                 lineWidths.push(lastSpaceWidth);
                 maxLineWidth = Math.max(maxLineWidth, lastSpaceWidth);
@@ -266,6 +269,7 @@ export default class BitmapText extends core.Container
         {
             this.removeChild(this._glyphs[i]);
         }
+        this._glyphs.splice(lenChars);
 
         this._textWidth = maxLineWidth * scale;
         this._textHeight = (pos.y + data.lineHeight) * scale;
