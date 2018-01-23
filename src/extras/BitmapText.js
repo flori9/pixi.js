@@ -146,15 +146,14 @@ export default class BitmapText extends core.Container
         let line = 0;
         let lastSpace = -1;
         let lastSpaceWidth = 0;
-        //The number of characters in the string that do not get added to
-        //chars
+        // The number of characters in the string that do not get added to chars
         let charsNotHandled = 0;
         let maxLineHeight = 0;
 
         for (let i = 0; i < this.text.length; i++)
         {
             const charCode = this.text.charCodeAt(i);
-            
+
             if (/(\s)/.test(this.text.charAt(i)))
             {
                 lastSpace = i;
@@ -167,7 +166,7 @@ export default class BitmapText extends core.Container
                 maxLineWidth = Math.max(maxLineWidth, lastLineWidth);
                 line++;
                 ++charsNotHandled;
-                
+
                 pos.x = 0;
                 pos.y += data.lineHeight;
                 prevCharCode = null;
