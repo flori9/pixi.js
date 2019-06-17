@@ -1721,18 +1721,18 @@ export default class InteractionManager extends EventEmitter
     {
         const normalizedEvents = [];
 
-        var hasTouchEvents = this.supportsTouchEvents;
+        let hasTouchEvents = this.supportsTouchEvents;
 
         if (hasTouchEvents)
         {
             try
             {
-                new TouchEvent("", null)
+                new TouchEvent('', null); // eslint-disable-line
             }
-            catch(e)
+            catch (e)
             {
                 hasTouchEvents = false;
-            } 
+            }
         }
 
         if (hasTouchEvents && event instanceof TouchEvent)
