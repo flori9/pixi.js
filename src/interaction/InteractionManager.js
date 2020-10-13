@@ -1727,7 +1727,7 @@ export default class InteractionManager extends EventEmitter
         {
             try
             {
-                new TouchEvent('', null); // eslint-disable-line
+                event instanceof TouchEvent; // eslint-disable-line
             }
             catch (e)
             {
