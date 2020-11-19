@@ -481,7 +481,7 @@ export default class Texture extends EventEmitter
             /* eslint-disable no-console */
             if (TextureCache[id])
             {
-                console.warn(`Texture added to the cache with an id [${id}] that already had an entry`);
+                //console.warn(`Texture added to the cache with an id [${id}] that already had an entry`);
             }
             /* eslint-enable no-console */
             // @endif

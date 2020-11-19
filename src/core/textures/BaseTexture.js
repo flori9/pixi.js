@@ -802,7 +802,7 @@ export default class BaseTexture extends EventEmitter
             /* eslint-disable no-console */
             if (BaseTextureCache[id])
             {
-                console.warn(`BaseTexture added to the cache with an id [${id}] that already had an entry`);
+                //console.warn(`BaseTexture added to the cache with an id [${id}] that already had an entry`);
             }
             /* eslint-enable no-console */
             // @endif
